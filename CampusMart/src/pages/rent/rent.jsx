@@ -13,7 +13,6 @@ export const Rent = () => {
 
     useEffect(() => {
         axios.get(baseUrl + 'rentProducts').then((response) => {
-            console.log(response.data);
             setProducts(response.data);
         })
     },[])
