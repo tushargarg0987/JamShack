@@ -9,6 +9,6 @@ export const RentProduct = (props) =>{
         <div className="description">
             <p><b>{productName}</b></p>
         </div>
-        <button className="addToCartBttn" onClick={()=>rentItem(id)}>Rent</button>
+        <button className="addToCartBttn" onClick={()=>rentItem(props.data)}>Rent</button>
     </div>
 }
