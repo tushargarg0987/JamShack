@@ -60,6 +60,7 @@ const requestSchema = new mongoose.Schema({
 
 const User = new mongoose.model("User", userSchema);
 const Product = new mongoose.model("Product", productSchema);
+const Rent = new mongoose.model("Rent", productSchema);
 const Request = new mongoose.model("Request", requestSchema);
 
 app.get('/', function (req, res) {
@@ -151,6 +152,43 @@ app.get('/saleProducts', async (req, res) => {
 
 app.get('/productDetails', async (req, res) => {
     const productDetail = await Product.find({ id: req.query.id });
+    res.send(productDetail[0]);
+})
+
+app.post('/addForRent', async (req, res) => {
+    var flag = 1
+    while (flag) {
+        try {
+            const newRent = new Rent({
+                id: (Math.random() * 1000000).toFixed(0),
+                productName: req.body.productName,
+                price: req.body.price,
+                productImage: req.body.productImage,
+                contact: req.body.contact ? req.body.contact : null,
+                name: req.body.name,
+                email: req.body.email,
+            })
+            await newRent.save();
+            flag = 0;
+            res.status(200).send("Added")
+        }
+        catch (err) {
+            if (err.keyValue.id) {
+                flag = 1;
+            } else {
+                res.status(500).send("Error")
+            }
+        }
+    }
+})
+
+app.get('/rentProducts', async (req, res) => {
+    const allProducts = await Rent.find();
+    res.send(allProducts);
+})
+
+app.get('/rentProductDetails', async (req, res) => {
+    const productDetail = await Rent.find({ id: req.query.id });
     res.send(productDetail[0]);
 })
 

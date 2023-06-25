@@ -11,7 +11,7 @@ export const Product = (props) => {
             <p><b>{productName}</b></p>
             <p>Rs.{price}</p>
         </div>
-        <button className="addToCartBttn" onClick={() => clickToBuy(id)}> 
+        <button className="addToCartBttn" onClick={() => clickToBuy(props.data)}> 
             Buy 
         </button>
     </div>
