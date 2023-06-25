@@ -12,7 +12,7 @@ export const Buy = () => {
 
     useEffect(() => {
         axios.get(baseUrl + 'saleProducts').then((response) => {
-            console.log(response.data);
+            // console.log(response);
             setProducts(response.data);
         })
     },[])
