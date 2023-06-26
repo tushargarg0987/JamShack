@@ -7,9 +7,18 @@ const saltRounds = 10;
 
 const app = express();
 
-var http = require('http').Server(app)
-var io = require('socket.io')(http)
+var http = require('http')
+var {Server} = require('socket.io')
 var path = require('path')
+
+const server = http.createServer(app)
+
+const io = new Server(server, {
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET","POST"]
+    }
+})
 
 app.use(bodyParser.json());
 app.use(cors())
@@ -247,18 +256,17 @@ app.get('/requestDetails', async (req, res) => {
 
 //http://localhost:3000/chat?cred={"id":"309232","name":"Tushar"}
 
-io.of('/chat')
-    .on('connection', function (socket) {
+io.on('connection', function (socket) {
         const roomId = JSON.parse(socket.handshake.query.cred)
         console.log("Connected");
         console.log('Input param : ' + roomId.id);
         socket.join("room-" + String(roomId.id))
         
         socket.on('chatFromClient', function (data) {
-            socket.in("room-" + String(roomId.id)).emit('chatFromServer',data + " from " + roomId.name)
+            socket.in("room-" + String(roomId.id)).emit('chatFromServer', roomId.name + " : " + data);
         })
 })
 
-http.listen(5000, () => {
+server.listen(5000, () => {
     console.log("Server started at 5000");
 })
