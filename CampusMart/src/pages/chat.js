@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import io from 'socket.io-client'
 
+var socket;
+
 function ChatScreen({id,name}) {
     const [chats, setChats] = useState([]);
-    var socket;
+    
     useEffect(() => {
         socket = io.connect(`http://localhost:5000?cred={"id":"${id}","name":"tushar"}`)
         socket.on('chatFromServer', (data) => {
