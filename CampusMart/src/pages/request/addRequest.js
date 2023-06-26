@@ -1,32 +1,22 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { baseUrl } from "../../basicConfig";
+import axios from "axios";
 
-export const Sell = () => {
-    const [productName, setProductName] = useState('');
-    const [imageUrl, setImageUrl] = useState('');
-    const [price,setPrice] = useState('')
+function addRequest() {
+    const [message,setMessage] = useState('')
     const [name,setName] = useState('')
     const [email,setEmail] = useState('')
     const [contact,setContact] = useState('')
 
     function submitHandler() {
-        axios.post(baseUrl + 'addForSale', {
-            productName: productName,
-            price: price,
-            productImage: imageUrl,
+        axios.post(baseUrl + 'addRequest', {
+            message: message,
             name: name,
             email: email,
             contact: contact
         }).then((response) => {
             
         })
-        console.log(productName);
-        console.log(price);
-        console.log(imageUrl);
-        setProductName('');
-        setPrice('');
-        setImageUrl('')
 
     }
 
@@ -49,17 +39,9 @@ export const Sell = () => {
                 <input value={email} placeholder="Email" onChange={(e) => {
                     setEmail(e.target.value)
                 }}></input>
-                <label>Product Name</label>
-                <input placeholder="Product Name" value={productName} onChange={(e) => {
-                    setProductName(e.target.value)
-                }}></input>
-                <label>Image URL</label>
-                <input value={imageUrl} placeholder="Image URL" onChange={(e) => {
-                    setImageUrl(e.target.value)
-                }}></input>
-                <label>Price</label>
-                <input value={price} placeholder="Price" onChange={(e) => {
-                    setPrice(e.target.value)
+                <label>Message</label>
+                <input value={message} placeholder="Message" onChange={(e) => {
+                    setMessage(e.target.value)
                 }}></input>
                 <label>Contact Number</label>
                 <input value={contact} placeholder="Contact Number" onChange={(e) => {
@@ -70,5 +52,7 @@ export const Sell = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
+
+export default addRequest

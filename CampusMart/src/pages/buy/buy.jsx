@@ -9,6 +9,7 @@ import { baseUrl } from "../../basicConfig";
 export const Buy = () => {
     const { ProductDisplay } = useContext(ShopContext)
     const [products, setProducts] = useState([]);
+    // actualData.filter((ele)=>{ele.category === selectedCategory})
 
     useEffect(() => {
         axios.get(baseUrl + 'saleProducts').then((response) => {

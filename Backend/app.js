@@ -47,7 +47,8 @@ const productSchema = new mongoose.Schema({
     productImage: String,
     contact: String,
     name: String,
-    email: String
+    email: String,
+    category: String
 })
 
 const requestSchema = new mongoose.Schema({
