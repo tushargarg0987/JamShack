@@ -5,6 +5,7 @@ export const ShopContext = createContext(null);
 
 export const BuyContextProvider = (props) => {
   const [SelectedItemContact, setSelectedItemContact] = useState("");
+  const [SelectedItemId, setSelectedItemId] = useState("");
   const [ProductDisplay, setProductDisplay] = useState(false);
   const [SelectedItemImage, setSelectedItemImage] = useState("");
   const [SelectedItemName, setSelectedItemName] = useState("");
@@ -19,8 +20,10 @@ export const BuyContextProvider = (props) => {
     setSelectedItemPrice(data.price);
     setSelectedItemEmail(data.email);
     setSelectedItemOwnerName(data.name);
+    setSelectedItemId(data.id)
   };
   const rentItem = (data) => {
+    setSelectedItemId(data.id)
     setSelectedItemContact(data.contact);
     setProductDisplay(true);
     setSelectedItemImage(data.productImage);
@@ -35,6 +38,7 @@ export const BuyContextProvider = (props) => {
   const contextValue = {
     clickToBuy,
     rentItem,
+    SelectedItemId,
     SelectedItemContact,
     ProductDisplay,
     SelectedItemImage,
