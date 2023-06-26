@@ -202,6 +202,11 @@ app.get('/rentProductDetails', async (req, res) => {
     res.send(productDetail[0]);
 })
 
+app.get('/allRequests', async (req, res) => {
+    const requests = await Request.find();
+    res.send(requests);
+})
+
 app.post('/addRequest', async (req, res) => {
     var flag = 1
     while (flag) {
