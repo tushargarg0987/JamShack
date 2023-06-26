@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { baseUrl } from "../../basicConfig";
 import axios from "axios";
 
-function addRequest() {
+function AddRequest({cancelHandler}) {
     const [message,setMessage] = useState('')
     const [name,setName] = useState('')
     const [email,setEmail] = useState('')
@@ -17,6 +17,7 @@ function addRequest() {
         }).then((response) => {
             
         })
+        cancelHandler();
 
     }
 
@@ -48,6 +49,7 @@ function addRequest() {
                     setContact(e.target.value)
                 }}></input>
                 <div className="add-sale-btn-div">
+                    <button onClick={()=>{cancelHandler()}}>Cancel</button>
                     <button onClick={submitHandler}>Submit</button>
                 </div>
             </div>
@@ -55,4 +57,4 @@ function addRequest() {
     )
 }
 
-export default addRequest
+export default AddRequest
